@@ -3,8 +3,14 @@ const crc32 = require('crc-32')
 const sha256 = require('sha256')
 const changeCase = require('change-case')
 
-const camelCase = ({ data }) => Object.assign({},
-  ...Object.keys(data).map(k => ({ [changeCase.camelCase(k)]: data[k] })))
+const replacements = {
+  class: 'clazz'
+}
+
+function refactor ({ data }, key = k => k) {
+  return Object.assign({},
+    ...Object.keys(data).map(k => ({ [key(k)]: data[k] })))
+}
 
 class Dimigo {
   constructor ({ host, username, password }) {
@@ -23,10 +29,10 @@ class Dimigo {
 
   async fetch (url, options = {}) {
     try {
-      return camelCase(await this.instance.get(url, options))
+      const key = k => changeCase.camelCase(replacements[k] || k)
+      return refactor(await this.instance.get(url, options), key)
     } catch (err) {
-      if (!err) throw new Error()
-      if (!err.response) throw err
+      if (!err || !err.response) throw (err || new Error())
 
       const { status, data } = err.response
       if (status !== 404) throw err // 404 -> unauthorized
