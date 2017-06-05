@@ -8,7 +8,7 @@
 $ npm install dimigo
 ```
 
-## Usage
+## Usage example
 ```js
 import Dimigo from 'dimigo'
 
@@ -17,9 +17,11 @@ const api = new Dimigo({
   username: 'dimigoin', password: 'yay'
 })
 
-async function run (username, password) {
+async function auth (username, password) {
   const me = await api.identifyUser(username, password))
-  console.log(me.id me.nick, me.email) // e.g. 907 Chalk amato17@naver.com
+
+  console.log(me.id, me.nick, me.email) // e.g. 907 Chalk amato17@naver.com
+  console.log(`You can update your profile at http://student.dimigo.hs.kr/user/sso?token=${me.ssoToken}&url=/user/profile`)
 
   switch (me.userType) {
     case 'S':
