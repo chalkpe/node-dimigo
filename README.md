@@ -8,8 +8,35 @@
 $ npm install dimigo
 ```
 
+## Usage
+```js
+import Dimigo from 'dimigo'
+
+const api = new Dimigo({
+  host: 'https://api.dimigo.hs.kr/v1',
+  username: 'dimigoin', password: 'yay'
+})
+
+async function run (username, password) {
+  const me = await api.identifyUser(username, password))
+  console.log(me.id me.nick, me.email) // e.g. 907 Chalk amato17@naver.com
+
+  switch (me.userType) {
+    case 'S':
+      const student = await api.getStudent(me.username) // e.g. ChalkPE
+      console.log(student.serial, student.name, student.dormitory) // e.g. 2409 박준영 학봉관
+      break
+
+    case 'T':
+      const teacher = await api.getTeacher(me.username) // e.g. sspark
+      console.log(teacher.role, teacher.position, teacher.name) // e.g. 비담임 교사 박성수
+      break
+  }
+}
+```
+
 ## API Reference
-- Dimigo
+- [Dimigo](#dimigo)
   - *constructor*
     - [new Dimigo(opts)](#new-dimigoopts)
   - *static*
@@ -115,7 +142,7 @@ The teacher data from Dimigo REST API.
 | `name` | `String` | Korean name |
 | `gender` | `String` | `M`: male, `F`: female, `NULL`: unknown |
 | `position` | `String?` | e.g. `부장교사`, `교사`, `교감`, `교장` |
-| `role` | `String?` | e.g. `담임`, `비담임`, `1학년부장`, `IT특성화부장`, `교무부장` |
+| `role` | `String?` | e.g. `담임`, `비담임`, `1학년부장`, `IT특성화부장` |
 | `grade` | `int?` | Current grade (`1` to `3`, if role is `담임` or `부담임`) |
 | `clazz` | `int?` | Current class (`1` to `6`, if role is `담임` or `부담임`) |
 
