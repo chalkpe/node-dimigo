@@ -6,11 +6,14 @@ const changeCase = require('change-case')
 const normalizeUrl = require('normalize-url')
 
 const keyReplacers = {
-  user_id: 'id',
   class: 'clazz',
   birthdate: 'birthday',
   photofile1: 'facePhoto',
-  photofile2: 'userPhoto'
+  photofile2: 'userPhoto',
+
+  user_id: 'id',
+  position_name: 'position',
+  role_name: 'role'
 }
 
 const valueReplacers = {
