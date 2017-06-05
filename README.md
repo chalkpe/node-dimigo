@@ -11,13 +11,13 @@ $ npm install dimigo
 ## API Reference
 - Dimigo
   - *constructor*
-    - new Dimigo(opts)
+    - [new Dimigo(opts)](#new-dimigoopts)
   - *static*
-    - .createHash(password) ⇒ `String`
+    - [.createHash(password)](#dimigocreatehashpassword) ⇒ `String`
   - *instance*
-    - .identifyUser(username, password, [hash]) ⇒ `Object`
-    - .getStudent(username) ⇒ `Object`
-    - .getTeacher(username) ⇒ `Object`
+    - [.identifyUser(username, password, [hash])](#apiidentifyuserusername-password-hash) ⇒ `Object`
+    - [.getStudent(username)](#apigetstudentusername) ⇒ `Object`
+    - [.getTeacher(username)](#apigetteacherusername) ⇒ `Object`
 
 ### Dimigo
 
@@ -53,7 +53,7 @@ Authenticate and get a data of the user.
 | ----- | ----- | ----- |
 | `username` | `String` | Username of Dimigo account |
 | `password` | `String` | Password of Dimigo account |
-| `hash` | `Function` | Hash function (default: `Dimigo.createHash`) |
+| `hash` | `Function?` | Hash function (default: `Dimigo.createHash`) |
 
 ##### Return value ⇒ `Object`
 The user data from Dimigo REST API.
