@@ -35,6 +35,10 @@ async function auth (username, password) {
       break
   }
 }
+
+auth('ChalkPE', 'P@ssw0rd')
+  .then(() => console.log('Success!'))
+  .catch(err => console.error(err.statusCode, err.message)) // 401 incorrect password.
 ```
 
 ## API Reference
