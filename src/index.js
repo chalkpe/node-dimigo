@@ -6,8 +6,11 @@ const changeCase = require('change-case')
 const normalizeUrl = require('normalize-url')
 
 const keyReplacers = {
-  '^class$': api => 'clazz',
-  '^birthdate$': api => 'birthday'
+  user_id: 'id',
+  class: 'clazz',
+  birthdate: 'birthday',
+  photofile1: 'facePhoto',
+  photofile2: 'userPhoto'
 }
 
 const valueReplacers = {
@@ -16,11 +19,10 @@ const valueReplacers = {
 
 function refactor (api, { data }) {
   return Object.assign({}, ...Object.entries(data).map(([key, value]) => {
-    const k = Object.keys(keyReplacers).find(r => key.match(r))
-    const newKey = changeCase.camelCase(k ? keyReplacers[k](api, key) : key)
-
     const v = Object.keys(valueReplacers).find(r => key.match(r))
+
     const newValue = v ? valueReplacers[v](api, value) : value
+    const newKey = changeCase.camelCase(keyReplacers[key] || key)
 
     return { [newKey]: newValue }
   }))
