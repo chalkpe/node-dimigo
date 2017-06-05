@@ -138,6 +138,10 @@ The student data from Dimigo REST API.
 #### api.getTeacher(username)
 Get a data of the teacher.
 
+| Param | Type | Description |
+| ----- | ----- | ----- |
+| `username` | `String` | Username of Dimigo **teacher** account |
+
 ##### Return value ⇒ `Object`
 The teacher data from Dimigo REST API.
 
